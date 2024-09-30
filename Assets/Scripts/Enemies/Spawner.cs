@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Enemies;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -20,7 +21,15 @@ public class Spawner : MonoBehaviour
         {
             for (int i = 0; i < spawnsPerPeriod; i++)
             {
-                Instantiate(characterPrefab, transform.position, transform.rotation);
+                //Instantiate(characterPrefab, transform.position, transform.rotation);
+                
+                Enemy enemy = Pool.instance.GetPooledObject();
+
+                if (enemy != null)
+                {
+                    enemy.transform.position = transform.position;
+                    enemy.gameObject.SetActive(true);
+                }
             }
 
             yield return new WaitForSeconds(period);

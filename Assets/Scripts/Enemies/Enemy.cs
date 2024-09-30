@@ -23,18 +23,22 @@ namespace Enemies
 
         private void OnEnable()
         {
-            //Is this necessary?? We're like, searching for it from every enemy D:
-            var townCenter = GameObject.FindGameObjectWithTag("TownCenter");
-            if (townCenter == null)
+            if (agent.isOnNavMesh)
             {
-                Debug.LogError($"{name}: Found no {nameof(townCenter)}!! :(");
-                return;
-            }
+                //Is this necessary?? We're like, searching for it from every enemy D:
+                var townCenter = GameObject.FindGameObjectWithTag("TownCenter");
+                if (townCenter == null)
+                {
+                    Debug.LogError($"{name}: Found no {nameof(townCenter)}!! :(");
+                    return;
+                }
 
-            var destination = townCenter.transform.position;
-            destination.y = transform.position.y;
-            agent.SetDestination(destination);
-            StartCoroutine(AlertSpawn());
+                var destination = townCenter.transform.position;
+                destination.y = transform.position.y;
+                agent.SetDestination(destination);
+                StartCoroutine(AlertSpawn());
+            }
+            
         }
 
         private IEnumerator AlertSpawn()
@@ -57,7 +61,9 @@ namespace Enemies
         private void Die()
         {
             OnDeath();
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            
+            gameObject.SetActive(false);
         }
     }
 }
