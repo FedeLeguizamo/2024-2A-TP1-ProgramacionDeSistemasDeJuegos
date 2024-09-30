@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace Enemies
 {
@@ -11,6 +13,7 @@ namespace Enemies
         [SerializeField] private NavMeshAgent agent;
         public event Action OnSpawn = delegate { };
         public event Action OnDeath = delegate { };
+        [SerializeField] private Vector3[] target;
     
         private void Reset() => FetchComponents();
 
@@ -26,17 +29,10 @@ namespace Enemies
             if (agent.isOnNavMesh)
             {
                 //Is this necessary?? We're like, searching for it from every enemy D:
-                var townCenter = GameObject.FindGameObjectWithTag("TownCenter");
-                if (townCenter == null)
-                {
-                    Debug.LogError($"{name}: Found no {nameof(townCenter)}!! :(");
-                    return;
-                }
-
-                var destination = townCenter.transform.position;
+                Vector3 towncenter = target[Random.Range(0, target.Length)];
+                var destination = towncenter;
                 destination.y = transform.position.y;
                 agent.SetDestination(destination);
-                StartCoroutine(AlertSpawn());
             }
             
         }
@@ -64,6 +60,19 @@ namespace Enemies
             //Destroy(gameObject);
             
             gameObject.SetActive(false);
+        }
+        
+        
+        public object Clone()
+        {
+            
+            Enemy clone = Instantiate(this);
+
+            // Verifico los eventos antes
+            clone.OnSpawn = (Action)Delegate.Combine(OnSpawn?.GetInvocationList());
+            clone.OnDeath = (Action)Delegate.Combine(OnDeath?.GetInvocationList());
+
+            return clone;
         }
     }
 }

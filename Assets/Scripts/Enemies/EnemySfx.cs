@@ -53,7 +53,12 @@ namespace Enemies
             if (!container.TryGetRandom(out var clipData))
                 return;
             
-            SpawnSource(sourcePrefab).Play(clipData);
+            //SpawnSource(sourcePrefab).Play(clipData);
+            var audioPlayer = ServiceLocator.GetAudioPlayer();
+            if (audioPlayer != null)
+            {
+                audioPlayer.Play(clipData);
+            }
         }
 
         private AudioPlayer SpawnSource(AudioPlayer prefab)

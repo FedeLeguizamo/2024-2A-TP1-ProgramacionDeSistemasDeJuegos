@@ -8,6 +8,13 @@ namespace Audio
     {
         [SerializeField] private OnFinishAction finishAction;
         private AudioSource _source;
+        
+        private void Awake()
+        {
+            // Registrar este AudioPlayer en el Service Locator
+            ServiceLocator.RegisterAudioPlayer(this);
+        }
+        
         public AudioSource Source
         {
             get

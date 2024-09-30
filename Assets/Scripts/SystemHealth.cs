@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SystemHealth : MonoBehaviour
 {
-    private int health = 100;
+    public int health = 100;
     public CharacterDataSO characterData; 
     
     void OnEnable()

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - TownCenter
+  - duende
+  - casa
   layers:
   - Default
   - TransparentFX

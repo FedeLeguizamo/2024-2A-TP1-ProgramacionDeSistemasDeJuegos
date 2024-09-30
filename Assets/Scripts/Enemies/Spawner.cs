@@ -17,22 +17,23 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator Start()
     {
-        while (!destroyCancellationToken.IsCancellationRequested)
+        while (true)  
         {
             for (int i = 0; i < spawnsPerPeriod; i++)
             {
-                //Instantiate(characterPrefab, transform.position, transform.rotation);
-                
-                Enemy enemy = Pool.instance.GetPooledObject();
+                // Agarro de la pool
+                Enemy pooledEnemy = Pool.instance.GetPooledObject();
 
-                if (enemy != null)
+                if (pooledEnemy != null)
                 {
-                    enemy.transform.position = transform.position;
-                    enemy.gameObject.SetActive(true);
-                }
-            }
+                    // Clono aca
+                    Enemy clonedEnemy = (Enemy)pooledEnemy.Clone();
 
-            yield return new WaitForSeconds(period);
+                    clonedEnemy.transform.position = transform.position;
+                    clonedEnemy.gameObject.SetActive(true);
+                }
+                yield return new WaitForSeconds(period);
+            }
         }
     }
 }

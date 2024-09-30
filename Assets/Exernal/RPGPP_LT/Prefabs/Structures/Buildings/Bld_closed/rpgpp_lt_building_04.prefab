@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4419083434238170}
   - component: {fileID: 33991798912505540}
   - component: {fileID: 23060441940367624}
-  - component: {fileID: 1546685354611904835}
   m_Layer: 0
   m_Name: rpgpp_lt_building_04
   m_TagString: Untagged
@@ -84,16 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1546685354611904835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1185082912798350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c67cac18b2f06dc46bc21cebeaa6362c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterData: {fileID: 11400000, guid: 7a619b04219c5fb4fbe35ce33581befe, type: 2}
