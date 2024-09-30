@@ -11,7 +11,6 @@ namespace Audio
         
         private void Awake()
         {
-            // Registrar este AudioPlayer en el Service Locator
             ServiceLocator.RegisterAudioPlayer(this);
         }
         
